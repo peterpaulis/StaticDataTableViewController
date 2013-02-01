@@ -16,6 +16,8 @@ than you can use methods
 <pre>
 @interface StaticDataTableViewController : UITableViewController
 
+@property (nonatomic, assign) BOOL hideSectionsWithHiddenRows;
+
 - (BOOL) cellIsHidden:(UITableViewCell *)cell;
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
@@ -28,6 +30,7 @@ than you can use methods
 to hide/show specific cells, to which you have an outlet
 
 <pre>
+self.hideSectionsWithHiddenRows = YES; //YES, NO
 [self cell:self.outletToMyStaticCell1 setHidden:hide];
 [self cell:self.outletToMyStaticCell2 setHidden:hide];
 [self reloadDataAnimated];
