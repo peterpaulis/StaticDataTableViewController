@@ -137,14 +137,16 @@
 
 - (OriginalRow *) originalRowWithTableViewCell:(UITableViewCell *)cell {
     
-    NSIndexPath * ip = [self.tableView indexPathForCell:cell];
+    for (int i = 0; i < [self.sections count]; ++i) {
     
-    OriginalSection * os = self.sections[ip.section];
+        OriginalSection * os = self.sections[i];
     
-    for (int ii = 0; ii < [os.rows count]; ++ii) {
-        
-        if ([os.rows[ii] cell] == cell) {
-            return os.rows[ii];
+        for (int ii = 0; ii < [os.rows count]; ++ii) {
+            
+            if ([os.rows[ii] cell] == cell) {
+                return os.rows[ii];
+            }
+            
         }
         
     }
@@ -184,9 +186,11 @@
 }
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden {
-    
     [[self.originalTable originalRowWithTableViewCell:cell] setHidden:hidden];
-    
+}
+
+- (BOOL) cellIsHidden:(UITableViewCell *)cell {
+    return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
 
 - (void) reloadDataAnimated {

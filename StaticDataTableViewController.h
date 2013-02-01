@@ -10,6 +10,8 @@
 
 @interface StaticDataTableViewController : UITableViewController
 
+- (BOOL) cellIsHidden:(UITableViewCell *)cell;
+
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
 
 - (void) reloadDataAnimated;
