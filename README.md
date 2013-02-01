@@ -27,8 +27,8 @@ than you can use methods
 
 to hide/show specific cells, to which you have an outlet
 
-<code>
+<pre>
 [self cell:self.outletToMyStaticCell1 setHidden:hide];
 [self cell:self.outletToMyStaticCell2 setHidden:hide];
 [self reloadDataAnimated];
-</code>
+</pre>
