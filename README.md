@@ -13,8 +13,9 @@ just subclass your UITableViewController
 
 than you can use methods
 
-<code>@interface StaticDataTableViewController : UITableViewController</code>
-<code>- (BOOL) cellIsHidden:(UITableViewCell *)cell;</code>
+<code>@interface StaticDataTableViewController : UITableViewController
+
+- (BOOL) cellIsHidden:(UITableViewCell *)cell;</code>
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
 
