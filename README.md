@@ -13,12 +13,22 @@ just subclass your UITableViewController
 
 than you can use methods
 
+<code>
+@interface StaticDataTableViewController : UITableViewController
+
+- (BOOL) cellIsHidden:(UITableViewCell *)cell;
+
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
+
 - (void) reloadDataAnimated;
+
+@end
+</code>
 
 to hide/show specific cells, to which you have an outlet
 
+<code>
 [self cell:self.outletToMyStaticCell1 setHidden:hide];
 [self cell:self.outletToMyStaticCell2 setHidden:hide];
 [self reloadDataAnimated];
-
+</code>
