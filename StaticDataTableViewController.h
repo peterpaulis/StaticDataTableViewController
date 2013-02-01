@@ -10,6 +10,8 @@
 
 @interface StaticDataTableViewController : UITableViewController
 
+@property (nonatomic, assign) BOOL hideSectionsWithHiddenRows;
+
 - (BOOL) cellIsHidden:(UITableViewCell *)cell;
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;

@@ -226,5 +226,30 @@
     return or.cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    CGFloat height = [super tableView:tableView heightForFooterInSection:section];
+    
+    if (self.originalTable == nil) {
+        return height;
+    }
+    
+    if (!self.hideSectionsWithHiddenRows) {
+        return height;
+    }
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([os numberOfVissibleRows] == 0) {
+        return 0;
+    } else {
+        return height;
+    }
+    
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+}
 
 @end
