@@ -9,7 +9,7 @@ Usage
 
 just subclass your UITableViewController
 
-@interface MyViewController : StaticDataTableViewController
+<pre>@interface MyViewController : StaticDataTableViewController</pre>
 
 than you can use methods
 
