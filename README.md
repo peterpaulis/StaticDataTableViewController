@@ -18,13 +18,13 @@ than you can use methods
 
 @property (nonatomic, assign) BOOL hideSectionsWithHiddenRows;
 
-- (BOOL) cellIsHidden:(UITableViewCell *)cell;
+- (BOOL)cellIsHidden:(UITableViewCell *)cell;
 
-- (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
+- (void)cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
 
 - (void)cells:(NSArray *)cells setHidden:(BOOL)hidden;
 
-- (void) reloadDataAnimated;
+- (void)reloadDataAnimated;
 
 @end
 </pre>
