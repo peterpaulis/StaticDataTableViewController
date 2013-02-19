@@ -22,16 +22,27 @@ than you can use methods
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
 
+- (void)cells:(NSArray *)cells setHidden:(BOOL)hidden;
+
 - (void) reloadDataAnimated;
 
 @end
 </pre>
 
 to hide/show specific cells, to which you have an outlet
-
 <pre>
 self.hideSectionsWithHiddenRows = YES; //YES, NO
 [self cell:self.outletToMyStaticCell1 setHidden:hide];
 [self cell:self.outletToMyStaticCell2 setHidden:hide];
 [self reloadDataAnimated];
 </pre>
+
+to hide/show cells in an outlet collection
+<pre>
+self.hideSectionsWithHiddenRows = YES; //YES, NO
+[self cells:self.outletCollectionToMyStaticCells setHidden:hide];
+[self reloadDataAnimated];
+</pre>
+
+Note
+Create outlets to UITableViews, not their content views!
