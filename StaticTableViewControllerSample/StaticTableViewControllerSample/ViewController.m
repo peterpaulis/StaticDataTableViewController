@@ -59,4 +59,16 @@
     [self toggleCellVissibility:self.cell23];
 }
 
+- (IBAction)buttonCellC12C22Pressed:(id)sender {
+    BOOL hide = ([sender tag] == 0);
+    [self cells:self.cells12_22 setHidden:hide];
+    [self reloadDataAnimated];
+}
+
+- (IBAction)buttonSectionPressed:(id)sender {
+    BOOL hide = ([sender tag] == 0);
+    [self cells:self.section2Cells setHidden:hide];
+    [self reloadDataAnimated];
+}
+
 @end

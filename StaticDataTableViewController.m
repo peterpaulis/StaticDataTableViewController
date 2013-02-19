@@ -91,7 +91,7 @@
             for (int ii = 0; ii < numberOfRows; ++ii) {
                 OriginalRow * tableViewRow = [OriginalRow new];
                 
-                NSIndexPath * ip = [NSIndexPath indexPathForItem:ii inSection:i];
+                NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView cellForRowAtIndexPath:ip];
                 
                 originalSection.rows[ii] = tableViewRow;
@@ -189,6 +189,12 @@
     [[self.originalTable originalRowWithTableViewCell:cell] setHidden:hidden];
 }
 
+- (void) cells:(NSArray *)cells setHidden:(BOOL)hidden {
+    for (UITableViewCell * cell in cells) {
+        [self cell:cell setHidden:hidden];
+    }
+}
+
 - (BOOL) cellIsHidden:(UITableViewCell *)cell {
     return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
@@ -246,10 +252,6 @@
     }
     
     return 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
 }
 
 @end

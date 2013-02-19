@@ -16,6 +16,8 @@
 
 - (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
 
+- (void) cells:(NSArray *)cells setHidden:(BOOL)hidden;
+
 - (void) reloadDataAnimated;
 
 @end
