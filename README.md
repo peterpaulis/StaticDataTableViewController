@@ -45,4 +45,9 @@ self.hideSectionsWithHiddenRows = YES; //YES, NO
 </pre>
 
 Note
-Create outlets to UITableViews, not their content views!
+- Create outlets to UITableViews, not their content views!
+- if you want to hide the whole section, just create a IBOutletCollection to all its cell, and then use [self cells:setHidden:]
+
+Version 1.1
+- added iOS5 back compatibility
+- added support for IBOutletCollections and hidding multiple cells with an array of IBOutles
