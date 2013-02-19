@@ -1,6 +1,6 @@
 //
 //  StaticTableViewController.m
-//  StaticTableViewController
+//  StaticTableViewController 1.1
 //
 //  Created by Peter Paulis on 31.1.2013.
 //  Copyright (c) 2013 Peter Paulis. All rights reserved.

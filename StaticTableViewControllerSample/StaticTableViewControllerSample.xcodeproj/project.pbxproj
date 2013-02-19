@@ -304,6 +304,7 @@
 				7EF99BFA16BC4DB90066958C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
