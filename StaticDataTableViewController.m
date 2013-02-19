@@ -41,7 +41,7 @@
 
 @implementation OriginalSection
 
-- (int) numberOfVissibleRows {
+- (int)numberOfVissibleRows {
     int count = 0;
     for (OriginalRow * or in self.rows) {
         if (!or.hidden) {
@@ -52,7 +52,7 @@
     return count;
 }
 
-- (int) vissibleRowIndexWithTableViewCell:(UITableViewCell *)cell {
+- (int)vissibleRowIndexWithTableViewCell:(UITableViewCell *)cell {
     
     int i  = 0;
     for (OriginalRow * or in self.rows) {
@@ -87,7 +87,7 @@
 
 @implementation OriginalTable
 
-- (id) initWithTableView:(UITableView *) tableView {
+- (id)initWithTableView:(UITableView *) tableView {
     
     self = [super init];
     if (self) {
@@ -118,7 +118,7 @@
     return self;
 }
 
-- (OriginalRow *) originalRowWithIndexPath:(NSIndexPath *)indexPath {
+- (OriginalRow *)originalRowWithIndexPath:(NSIndexPath *)indexPath {
     
     OriginalSection * oSection = self.sections[indexPath.section];
     OriginalRow * oRow = oSection.rows[indexPath.row];
@@ -126,7 +126,7 @@
     return oRow;
 }
 
-- (OriginalRow *) vissibleOriginalRowWithIndexPath:(NSIndexPath *)indexPath {
+- (OriginalRow *)vissibleOriginalRowWithIndexPath:(NSIndexPath *)indexPath {
     
     OriginalSection * oSection = self.sections[indexPath.section];
     int vissibleIndex = -1;
@@ -147,7 +147,7 @@
     return nil;
 }
 
-- (OriginalRow *) originalRowWithTableViewCell:(UITableViewCell *)cell {
+- (OriginalRow *)originalRowWithTableViewCell:(UITableViewCell *)cell {
     
     for (int i = 0; i < [self.sections count]; ++i) {
     
