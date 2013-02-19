@@ -1,6 +1,6 @@
 //
 //  StaticTableViewController.m
-//  WhatsInMyFood
+//  StaticTableViewController
 //
 //  Created by Peter Paulis on 31.1.2013.
 //  Copyright (c) 2013 Peter Paulis. All rights reserved.
@@ -8,7 +8,11 @@
 
 #import "StaticDataTableViewController.h"
 
-// ------------------
+////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark OriginalRow
+#pragma mark -
+////////////////////////////////////////////////////////////////////////
 
 @interface OriginalRow : NSObject
 
@@ -21,7 +25,11 @@
 @implementation OriginalRow
 @end
 
-// ------------------
+////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark OriginalSection
+#pragma mark -
+////////////////////////////////////////////////////////////////////////
 
 @interface OriginalSection : NSObject
 
@@ -63,7 +71,11 @@
 
 @end
 
-// ------------------
+////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark OriginalTable
+#pragma mark -
+////////////////////////////////////////////////////////////////////////
 
 @interface OriginalTable : NSObject
 
@@ -154,11 +166,13 @@
     return nil;
 }
 
-
-
 @end
 
-// ------------------
+////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark StaticDataTableViewController
+#pragma mark -
+////////////////////////////////////////////////////////////////////////
 
 @interface StaticDataTableViewController ()
 
@@ -177,6 +191,8 @@
     return self;
 }
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -185,21 +201,23 @@
     
 }
 
-- (void) cell:(UITableViewCell *)cell setHidden:(BOOL)hidden {
+#pragma mark - Public
+
+- (void)cell:(UITableViewCell *)cell setHidden:(BOOL)hidden {
     [[self.originalTable originalRowWithTableViewCell:cell] setHidden:hidden];
 }
 
-- (void) cells:(NSArray *)cells setHidden:(BOOL)hidden {
+- (void)cells:(NSArray *)cells setHidden:(BOOL)hidden {
     for (UITableViewCell * cell in cells) {
         [self cell:cell setHidden:hidden];
     }
 }
 
-- (BOOL) cellIsHidden:(UITableViewCell *)cell {
+- (BOOL)cellIsHidden:(UITableViewCell *)cell {
     return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
 
-- (void) reloadDataAnimated {
+- (void)reloadDataAnimated {
     
     [self.tableView reloadData];
     
@@ -210,7 +228,7 @@
 
 }
 
-#pragma Mark - TableView Data Source
+#pragma mark - TableView Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
