@@ -17,7 +17,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IP7-QU-RwD">
-                                    <rect key="frame" x="118" y="4" width="60" height="44"/>
+                                    <rect key="frame" x="162" y="4" width="43" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_11">
@@ -32,7 +32,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7XX-tY-AWz">
-                                    <rect key="frame" x="186" y="4" width="60" height="44"/>
+                                    <rect key="frame" x="213" y="4" width="47" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_12">
@@ -47,7 +47,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZlZ-HE-KxH">
-                                    <rect key="frame" x="254" y="4" width="60" height="44"/>
+                                    <rect key="frame" x="268" y="4" width="46" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_13">
@@ -62,7 +62,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fht-5V-8py">
-                                    <rect key="frame" x="118" y="55" width="60" height="44"/>
+                                    <rect key="frame" x="162" y="55" width="43" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_21">
@@ -77,7 +77,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sN1-5d-Ehi">
-                                    <rect key="frame" x="186" y="55" width="60" height="44"/>
+                                    <rect key="frame" x="213" y="55" width="47" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_22">
@@ -92,7 +92,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Wk-1I-YKI">
-                                    <rect key="frame" x="254" y="55" width="60" height="44"/>
+                                    <rect key="frame" x="268" y="55" width="46" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="C_23">
@@ -106,22 +106,22 @@
                                         <action selector="buttonCell23Pressed:" destination="pBy-r6-vzv" eventType="touchUpInside" id="9Zu-fX-b3G"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Section 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CMu-eH-YNL">
-                                    <rect key="frame" x="20" y="65" width="71" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sec. 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CMu-eH-YNL">
+                                    <rect key="frame" x="124" y="66" width="39" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Section 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0SV-bN-SwE">
-                                    <rect key="frame" x="20" y="14" width="71" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sec. 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0SV-bN-SwE">
+                                    <rect key="frame" x="124" y="15" width="39" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="Agw-TD-E8J">
-                                    <rect key="frame" x="118" y="116" width="60" height="44"/>
+                                    <rect key="frame" x="3" y="55" width="66" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                     <state key="normal" title="Hide Collection C_12, C_22">
@@ -136,7 +136,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="r2G-oT-cAb">
-                                    <rect key="frame" x="44" y="116" width="66" height="44"/>
+                                    <rect key="frame" x="3" y="4" width="66" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                     <state key="normal" title="Show Collection C_12, C_22">
@@ -156,7 +156,7 @@
                                     <color key="backgroundColor" red="0.1019607843" green="0.20784313730000001" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="J28-Qq-sMp">
-                                    <rect key="frame" x="254" y="116" width="58" height="44"/>
+                                    <rect key="frame" x="70" y="55" width="47" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                     <state key="normal" title="Hide Section2">
@@ -171,7 +171,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="xuN-wI-km9">
-                                    <rect key="frame" x="186" y="116" width="60" height="44"/>
+                                    <rect key="frame" x="70" y="4" width="46" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                     <state key="normal" title="Show Section2">
@@ -185,6 +185,28 @@
                                         <action selector="buttonSectionPressed:" destination="pBy-r6-vzv" eventType="touchUpInside" id="fcs-LN-dOY"/>
                                     </connections>
                                 </button>
+                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="TDK-MU-cHP">
+                                    <rect key="frame" x="5" y="132" width="79" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </switch>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Reload only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4dt-bJ-a2L">
+                                    <rect key="frame" x="5" y="114" width="77" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="n8D-NB-dMk">
+                                    <rect key="frame" x="237" y="132" width="79" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </switch>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Animated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bO6-7D-5YS">
+                                    <rect key="frame" x="237" y="114" width="77" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -318,6 +340,8 @@
                         <outlet property="cell21" destination="qPi-b2-0eS" id="z1e-Lh-JEE"/>
                         <outlet property="cell22" destination="xFn-4I-SHj" id="TRZ-7g-06b"/>
                         <outlet property="cell23" destination="GxL-dU-G25" id="Fte-f3-Z7Y"/>
+                        <outlet property="switchAnimated" destination="n8D-NB-dMk" id="19g-L7-kuW"/>
+                        <outlet property="switchReloadOnlyDontToggleVissibility" destination="TDK-MU-cHP" id="Rtn-Vn-AJH"/>
                         <outletCollection property="cells12_22" destination="Lfx-Ar-VZk" id="ugg-dt-zkh"/>
                         <outletCollection property="cells12_22" destination="xFn-4I-SHj" id="Q6O-68-4Ib"/>
                         <outletCollection property="section2Cells" destination="qPi-b2-0eS" id="XDR-pL-pcp"/>
@@ -351,8 +375,9 @@
                 <relationship kind="outlet" name="cell21" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cell22" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cell23" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="switchAnimated" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="switchReloadOnlyDontToggleVissibility" candidateClass="UISwitch"/>
                 <relationship kind="outletCollection" name="cells12_22" candidateClass="UITableViewCell"/>
-                <relationship kind="outletCollection" name="section2" candidateClass="UITableViewCell"/>
                 <relationship kind="outletCollection" name="section2Cells" candidateClass="UITableViewCell"/>
             </relationships>
         </class>

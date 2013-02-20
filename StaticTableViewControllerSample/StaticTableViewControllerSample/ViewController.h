@@ -24,6 +24,8 @@
 - (IBAction)buttonCell23Pressed:(id)sender;
 - (IBAction)buttonCellC12C22Pressed:(id)sender;
 - (IBAction)buttonSectionPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *switchReloadOnlyDontToggleVissibility;
+@property (weak, nonatomic) IBOutlet UISwitch *switchAnimated;
 
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *section2Cells;
 

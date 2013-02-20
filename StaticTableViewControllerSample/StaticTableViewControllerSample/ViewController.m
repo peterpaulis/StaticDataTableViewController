@@ -28,47 +28,71 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) toggleCellVissibility:(UITableViewCell *)cell {
+- (void) toggleCellVissibilityOrReload:(UITableViewCell *)cell {
 
-    [self cell:cell setHidden:![self cellIsHidden:cell]];
-    [self reloadDataAnimated];
-
+    if ([self.switchReloadOnlyDontToggleVissibility isOn]) {
+        [self updateCell:cell];
+    } else {
+        [self cell:cell setHidden:![self cellIsHidden:cell]];
+    }
+    
+    [self reloadDataAnimated:([self.switchAnimated isOn])];
 }
 
 - (IBAction)buttonCell11Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell11];
+    [self toggleCellVissibilityOrReload:self.cell11];
 }
 
 - (IBAction)buttonCell12Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell12];
+    [self toggleCellVissibilityOrReload:self.cell12];
 }
 
 - (IBAction)buttonCell13Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell13];
+    [self toggleCellVissibilityOrReload:self.cell13];
 }
 
 - (IBAction)buttonCell21Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell21];
+    [self toggleCellVissibilityOrReload:self.cell21];
 }
 
 - (IBAction)buttonCell22Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell22];
+    [self toggleCellVissibilityOrReload:self.cell22];
 }
 
 - (IBAction)buttonCell23Pressed:(id)sender {
-    [self toggleCellVissibility:self.cell23];
+    [self toggleCellVissibilityOrReload:self.cell23];
 }
 
 - (IBAction)buttonCellC12C22Pressed:(id)sender {
-    BOOL hide = ([sender tag] == 0);
-    [self cells:self.cells12_22 setHidden:hide];
-    [self reloadDataAnimated];
+    
+    if ([self.switchReloadOnlyDontToggleVissibility isOn]) {
+    
+        [self updateCells:self.cells12_22];
+        
+    } else {
+    
+        BOOL hide = ([sender tag] == 0);
+        [self cells:self.cells12_22 setHidden:hide];
+        
+    }
+    
+    [self reloadDataAnimated:([self.switchAnimated isOn])];
 }
 
 - (IBAction)buttonSectionPressed:(id)sender {
-    BOOL hide = ([sender tag] == 0);
-    [self cells:self.section2Cells setHidden:hide];
-    [self reloadDataAnimated];
+    
+    if ([self.switchReloadOnlyDontToggleVissibility isOn]) {
+    
+        [self updateCells:self.section2Cells];
+        
+    } else {
+    
+        BOOL hide = ([sender tag] == 0);
+        [self cells:self.section2Cells setHidden:hide];
+        
+    }
+    
+    [self reloadDataAnimated:([self.switchAnimated isOn])];
 }
 
 @end

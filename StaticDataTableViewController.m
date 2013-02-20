@@ -1,12 +1,17 @@
 //
 //  StaticTableViewController.m
-//  StaticTableViewController 1.1
+//  StaticTableViewController 2.0
 //
 //  Created by Peter Paulis on 31.1.2013.
 //  Copyright (c) 2013 Peter Paulis. All rights reserved.
 //
 
 #import "StaticDataTableViewController.h"
+
+#define kBatchOperationNone     0
+#define kBatchOperationInsert   1
+#define kBatchOperationDelete   2
+#define kBatchOperationUpdate   3
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark -
@@ -18,11 +23,46 @@
 
 @property (nonatomic, assign) BOOL hidden;
 
+@property (nonatomic, assign) BOOL hiddenReal;
+
+@property (nonatomic, assign) BOOL hiddenPlanned;
+
+@property (nonatomic, assign) int batchOperation;
+
 @property (nonatomic, weak) UITableViewCell * cell;
+
+@property (nonatomic, strong) NSIndexPath * originalIndexPath;
+
+- (void)update;
 
 @end
 
 @implementation OriginalRow
+
+- (BOOL)hidden {
+    return (self.hiddenPlanned || self.hiddenPlanned);
+}
+
+- (void)setHidden:(BOOL)hidden {
+    
+    if ((!self.hiddenReal) && (hidden)) {
+        self.batchOperation = kBatchOperationDelete;
+    } else if ((self.hiddenReal) && (!hidden)) {
+        self.batchOperation = kBatchOperationInsert;
+    }
+    
+    self.hiddenPlanned = hidden;
+}
+
+- (void)update {
+    
+    if (!self.hidden) {
+        if (self.batchOperation == kBatchOperationNone) {
+            self.batchOperation = kBatchOperationUpdate;
+        }
+    }
+}
+
 @end
 
 ////////////////////////////////////////////////////////////////////////
@@ -83,11 +123,17 @@
 
 @property (nonatomic, weak) UITableView * tableView;
 
+@property (nonatomic, strong) NSMutableArray * insertIndexPaths;
+
+@property (nonatomic, strong) NSMutableArray * deleteIndexPaths;
+
+@property (nonatomic, strong) NSMutableArray * updateIndexPaths;
+
 @end
 
 @implementation OriginalTable
 
-- (id)initWithTableView:(UITableView *) tableView {
+- (id)initWithTableView:(UITableView *)tableView {
     
     self = [super init];
     if (self) {
@@ -95,10 +141,12 @@
         int numberOfSections = [tableView numberOfSections];
         self.sections = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
         
+        int totalNumberOfRows = 0;
         for (int i = 0; i < numberOfSections; ++i) {
             OriginalSection * originalSection = [OriginalSection new];
             
             int numberOfRows = [tableView numberOfRowsInSection:i];
+            totalNumberOfRows += numberOfRows;
             originalSection.rows = [[NSMutableArray alloc] initWithCapacity:numberOfRows];
             for (int ii = 0; ii < numberOfRows; ++ii) {
                 OriginalRow * tableViewRow = [OriginalRow new];
@@ -106,13 +154,20 @@
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView cellForRowAtIndexPath:ip];
                 
+                tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:ii inSection:i];
+                
                 originalSection.rows[ii] = tableViewRow;
             }
             
             self.sections[i] = originalSection;
         }
+     
+        self.insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
+        self.deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
+        self.updateIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         
         self.tableView = tableView;
+        
     }
     
     return self;
@@ -166,6 +221,86 @@
     return nil;
 }
 
+- (NSIndexPath *)indexPathForInsertingOriginalRow:(OriginalRow *)originalRow {
+    
+    OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
+    int vissibleIndex = -1;
+    for (int i = 0; i < originalRow.originalIndexPath.row; ++i) {
+        
+        OriginalRow * oRow = [oSection.rows objectAtIndex:i];
+        
+        if (!oRow.hidden) {
+            ++vissibleIndex;
+        }
+        
+    }
+    
+    return [NSIndexPath indexPathForRow:vissibleIndex + 1 inSection:originalRow.originalIndexPath.section];
+    
+}
+
+- (NSIndexPath *)indexPathForDeletingOriginalRow:(OriginalRow *)originalRow {
+    
+    OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
+    int vissibleIndex = -1;
+    for (int i = 0; i < originalRow.originalIndexPath.row; ++i) {
+        
+        OriginalRow * oRow = [oSection.rows objectAtIndex:i];
+        
+        if (!oRow.hiddenReal) {
+            ++vissibleIndex;
+        }
+        
+    }
+    
+    return [NSIndexPath indexPathForRow:vissibleIndex + 1 inSection:originalRow.originalIndexPath.section];
+    
+}
+
+- (void)prepareUpdates {
+    
+    [self.insertIndexPaths removeAllObjects];
+    [self.deleteIndexPaths removeAllObjects];
+    [self.updateIndexPaths removeAllObjects];
+    
+    for (OriginalSection * os in self.sections) {
+        
+        for (OriginalRow * or in os.rows) {
+        
+            if (or.batchOperation == kBatchOperationDelete) {
+                
+                NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
+                [self.deleteIndexPaths addObject:ip];
+                
+            } else if (or.batchOperation == kBatchOperationInsert) {
+            
+                NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
+                [self.insertIndexPaths addObject:ip];
+                
+            } else if (or.batchOperation == kBatchOperationUpdate) {
+                
+                NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
+                [self.updateIndexPaths addObject:ip];
+                
+            }
+            
+        }
+        
+    }
+    
+    for (OriginalSection * os in self.sections) {
+        
+        for (OriginalRow * or in os.rows) {
+            
+            or.hiddenReal = or.hiddenPlanned;
+            or.batchOperation = kBatchOperationNone;
+            
+        }
+        
+    }
+    
+}
+
 @end
 
 ////////////////////////////////////////////////////////////////////////
@@ -186,7 +321,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        
         // Custom initialization
+        
     }
     return self;
 }
@@ -197,14 +334,34 @@
 {
     [super viewDidLoad];
 
+    self.insertTableViewRowAnimation = UITableViewRowAnimationRight;
+    self.deleteTableViewRowAnimation = UITableViewRowAnimationLeft;
+    self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
+    
     self.originalTable = [[OriginalTable alloc] initWithTableView:self.tableView];
     
 }
 
 #pragma mark - Public
 
+- (void)updateCell:(UITableViewCell *)cell {
+    
+    OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
+    [row update];
+    
+}
+
+- (void)updateCells:(NSArray *)cells {
+    for (UITableViewCell * cell in cells) {
+        [self updateCell:cell];
+    }
+}
+
 - (void)cell:(UITableViewCell *)cell setHidden:(BOOL)hidden {
-    [[self.originalTable originalRowWithTableViewCell:cell] setHidden:hidden];
+    
+    OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
+    [row setHidden:hidden];
+    
 }
 
 - (void)cells:(NSArray *)cells setHidden:(BOOL)hidden {
@@ -217,15 +374,30 @@
     return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
 
-- (void)reloadDataAnimated {
-    
-    [self.tableView reloadData];
-    
-    NSIndexSet * reloadSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView])];
-    
-    [self.tableView reloadSections:reloadSet withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView reloadData];
+- (void)reloadDataAnimated:(BOOL)animated {
 
+    [self.originalTable prepareUpdates];
+    
+    if (!animated) {
+    
+        [self.tableView reloadData];
+        
+    } else {
+    
+        [self.tableView beginUpdates];
+        
+        [self.tableView reloadRowsAtIndexPaths:self.originalTable.updateIndexPaths withRowAnimation:self.reloadTableViewRowAnimation];
+        
+        [self.tableView insertRowsAtIndexPaths:self.originalTable.insertIndexPaths withRowAnimation:self.insertTableViewRowAnimation];
+        
+        [self.tableView deleteRowsAtIndexPaths:self.originalTable.deleteIndexPaths withRowAnimation:self.deleteTableViewRowAnimation];
+        
+        [self.tableView endUpdates];
+        
+        [self.tableView reloadData];
+        
+    }
+    
 }
 
 #pragma mark - TableView Data Source
