@@ -152,7 +152,9 @@
                 OriginalRow * tableViewRow = [OriginalRow new];
                 
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
-                tableViewRow.cell = [tableView cellForRowAtIndexPath:ip];
+                tableViewRow.cell = [tableView.dataSource tableView:tableView cellForRowAtIndexPath:ip];
+                
+                NSAssert(tableViewRow.cell != nil, @"cannot be nil");
                 
                 tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:ii inSection:i];
                 
@@ -418,6 +420,8 @@
     }
     
     OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
+    
+    NSAssert(or.cell != nil, @"CANNOT BE NULL");
     
     return or.cell;
 }

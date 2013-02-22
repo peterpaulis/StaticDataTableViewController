@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../StaticDataTableViewController.m"
-         timestampString = "383046898.861309"
+         timestampString = "383251268.717145"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "226"
-         endingLineNumber = "226"
+         startingLineNumber = "228"
+         endingLineNumber = "228"
          landmarkName = "-indexPathForInsertingOriginalRow:"
          landmarkType = "5">
       </FileBreakpoint>
