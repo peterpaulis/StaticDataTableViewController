@@ -5,6 +5,9 @@ Enables to hide static cells
 
 This class enables to hide/show static cells (created in IB, using the option Content : Static cells) for UITableView
 
+Version 2.0.1
+- fixed critical crash
+
 Version 2.0
 - added full row animation support
 
