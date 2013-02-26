@@ -74,7 +74,7 @@ self.hideSectionsWithHiddenRows = YES; //YES, NO
 
 to reload cell in an outlet collection
 <pre>
-[self updateCell:self.outletCollectionToMyStaticCells];
+[self updateCells:self.outletCollectionToMyStaticCells];
 [self reloadDataAnimated:YES];
 </pre>
 
