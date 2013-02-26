@@ -85,3 +85,5 @@ Note
 - Don't call [self.tableView reloadData], ALWAYS use (reloadDataAnimated:)
 - if you want to hide the whole section, just create a IBOutletCollection to all its cell, and then use [self cells:setHidden:] with (self.hideSectionsWithHiddenRows = YES)
 
+License
+Apache License 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
