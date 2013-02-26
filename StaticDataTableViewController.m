@@ -426,6 +426,16 @@
     return or.cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.originalTable != nil) {
+        OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
+        indexPath = or.originalIndexPath;
+    }
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     CGFloat height = [super tableView:tableView heightForFooterInSection:section];
