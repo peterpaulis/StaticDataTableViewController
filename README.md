@@ -48,7 +48,7 @@ Version 1.1
 - added support for IBOutletCollections and hidding multiple cells with an array of IBOutles
 
 ##Note
-- Create outlets to UITableViews, not their content views!
+- Create outlets to UITableViewsCells, not their content views!
 - Don't call [self.tableView reloadData], ALWAYS use (reloadDataAnimated:)
 - if you want to hide the whole section, just create a IBOutletCollection to all its cell, and then use [self cells:setHidden:] with (self.hideSectionsWithHiddenRows = YES)
 
