@@ -1,20 +1,12 @@
 StaticDataTableViewController 2.0
 =============================
 
-Enables to hide static cells
-
-This class enables to hide/show static cells (created in IB, using the option Content : Static cells) for UITableView
+This class enables animated hide/show of static cells (created in IB, using the option Content : Static cells) for UITableView
 
 ##Usage
 
-just subclass your UITableViewController
-
-<pre>
-// never call [self.tableView reloadData] directly
-// doing so will lead to data inconsistenci
-// always use this method for reload
-- (void)reloadDataAnimated:(BOOL)animated;
-</pre>
+- just subclass your UITableViewController with the StaticDataTableViewController
+- always use this method for table view reload (- (void)reloadDataAnimated:(BOOL)animated) don't call [self.tableView reloadData]
 
 to hide/show specific cells, to which you have an outlet
 <pre>
