@@ -29,8 +29,6 @@ to reload cell in an outlet collection
 [self reloadDataAnimated:YES];
 </pre>
 
-you can use (updateCells:) to reload multiple cells
-
 to customize animations, just set these properties to desired values
 <pre>
 self.insertTableViewRowAnimation = UITableViewRowAnimationRight;
