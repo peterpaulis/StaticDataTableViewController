@@ -5,6 +5,7 @@ This class enables animated hide/show of static cells (created in IB, using the 
 
 ##Usage
 
+- add StaticDataTableViewController.h / .m to your project
 - just subclass your UITableViewController with the StaticDataTableViewController
 - always use this method for table view reload (- (void)reloadDataAnimated:(BOOL)animated) don't call [self.tableView reloadData]
 
