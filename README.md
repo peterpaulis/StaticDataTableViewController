@@ -59,3 +59,6 @@ Version 1.1
 
 ##License
 Apache License 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+##Credits
+min:60 - Building perfect apps, fo affordable price - <a href="https://min60.com">https://min60.com</a>
