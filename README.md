@@ -10,32 +10,32 @@ This class enables animated hide/show of static cells (created in IB, using the 
 - always use this method for table view reload (- (void)reloadDataAnimated:(BOOL)animated) don't call [self.tableView reloadData]
 
 to hide/show specific cells, to which you have an outlet
-<pre>
+``` objective-c
 self.hideSectionsWithHiddenRows = YES; //YES, NO
 [self cell:self.outletToMyStaticCell1 setHidden:hide];
 [self cell:self.outletToMyStaticCell2 setHidden:hide];
 [self reloadDataAnimated:YES];
-</pre>
+```
 
 to hide/show cells in an outlet collection
-<pre>
+``` objective-c
 self.hideSectionsWithHiddenRows = YES; //YES, NO
 [self cells:self.outletCollectionToMyStaticCells setHidden:hide];
 [self reloadDataAnimated:YES];
-</pre>
+```
 
 to reload cell in an outlet collection
-<pre>
+``` objective-c
 [self updateCells:self.outletCollectionToMyStaticCells];
 [self reloadDataAnimated:YES];
-</pre>
+```
 
 to customize animations, just set these properties to desired values
-<pre>
+``` objective-c
 self.insertTableViewRowAnimation = UITableViewRowAnimationRight;
 self.deleteTableViewRowAnimation = UITableViewRowAnimationLeft;
 self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
-</pre>
+```
 
 ##Version History
 
