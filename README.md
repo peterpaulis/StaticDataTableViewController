@@ -39,6 +39,9 @@ self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
 
 ##Version History
 
+Version 2.0.2.1
+- Added support for Cocoa pods 
+
 Version 2.0.2
 - Added support for variable heights on static rows
 
