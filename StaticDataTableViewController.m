@@ -438,7 +438,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    CGFloat height = [super tableView:tableView heightForFooterInSection:section];
+    CGFloat height = [super tableView:tableView heightForHeaderInSection:section];
     
     if (self.originalTable == nil) {
         return height;
