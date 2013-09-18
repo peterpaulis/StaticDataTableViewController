@@ -458,4 +458,12 @@
     return 0;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+		return nil;
+	} else {
+		return [super tableView:tableView titleForHeaderInSection:section];
+	}
+}
+
 @end
