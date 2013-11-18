@@ -81,8 +81,8 @@
 
 @implementation OriginalSection
 
-- (int)numberOfVissibleRows {
-    int count = 0;
+- (NSInteger)numberOfVissibleRows {
+    NSInteger count = 0;
     for (OriginalRow * or in self.rows) {
         if (!or.hidden) {
             ++count;
@@ -92,9 +92,9 @@
     return count;
 }
 
-- (int)vissibleRowIndexWithTableViewCell:(UITableViewCell *)cell {
+- (NSInteger)vissibleRowIndexWithTableViewCell:(UITableViewCell *)cell {
     
-    int i  = 0;
+    NSInteger i = 0;
     for (OriginalRow * or in self.rows) {
         
         if (or.cell == cell) {
@@ -138,17 +138,17 @@
     self = [super init];
     if (self) {
         
-        int numberOfSections = [tableView numberOfSections];
+        NSInteger numberOfSections = [tableView numberOfSections];
         self.sections = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
         
-        int totalNumberOfRows = 0;
-        for (int i = 0; i < numberOfSections; ++i) {
+        NSInteger totalNumberOfRows = 0;
+        for (NSInteger i = 0; i < numberOfSections; ++i) {
             OriginalSection * originalSection = [OriginalSection new];
             
-            int numberOfRows = [tableView numberOfRowsInSection:i];
+            NSInteger numberOfRows = [tableView numberOfRowsInSection:i];
             totalNumberOfRows += numberOfRows;
             originalSection.rows = [[NSMutableArray alloc] initWithCapacity:numberOfRows];
-            for (int ii = 0; ii < numberOfRows; ++ii) {
+            for (NSInteger ii = 0; ii < numberOfRows; ++ii) {
                 OriginalRow * tableViewRow = [OriginalRow new];
                 
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
@@ -186,7 +186,7 @@
 - (OriginalRow *)vissibleOriginalRowWithIndexPath:(NSIndexPath *)indexPath {
     
     OriginalSection * oSection = self.sections[indexPath.section];
-    int vissibleIndex = -1;
+    NSInteger vissibleIndex = -1;
     for (int i = 0; i < [oSection.rows count]; ++i) {
         
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
@@ -206,11 +206,11 @@
 
 - (OriginalRow *)originalRowWithTableViewCell:(UITableViewCell *)cell {
     
-    for (int i = 0; i < [self.sections count]; ++i) {
+    for (NSInteger i = 0; i < [self.sections count]; ++i) {
     
         OriginalSection * os = self.sections[i];
     
-        for (int ii = 0; ii < [os.rows count]; ++ii) {
+        for (NSInteger ii = 0; ii < [os.rows count]; ++ii) {
             
             if ([os.rows[ii] cell] == cell) {
                 return os.rows[ii];
@@ -226,8 +226,8 @@
 - (NSIndexPath *)indexPathForInsertingOriginalRow:(OriginalRow *)originalRow {
     
     OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
-    int vissibleIndex = -1;
-    for (int i = 0; i < originalRow.originalIndexPath.row; ++i) {
+    NSInteger vissibleIndex = -1;
+    for (NSInteger i = 0; i < originalRow.originalIndexPath.row; ++i) {
         
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
         
@@ -244,8 +244,8 @@
 - (NSIndexPath *)indexPathForDeletingOriginalRow:(OriginalRow *)originalRow {
     
     OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
-    int vissibleIndex = -1;
-    for (int i = 0; i < originalRow.originalIndexPath.row; ++i) {
+    NSInteger vissibleIndex = -1;
+    for (NSInteger i = 0; i < originalRow.originalIndexPath.row; ++i) {
         
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
         
