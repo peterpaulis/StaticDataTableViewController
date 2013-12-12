@@ -450,7 +450,7 @@
     
     OriginalSection * os = self.originalTable.sections[section];
     if ([os numberOfVissibleRows] == 0) {
-        return 0;
+        return CGFLOAT_MIN;
     } else {
         return height;
     }
