@@ -75,7 +75,8 @@
         [self cells:self.cells12_22 setHidden:hide];
         
     }
-    
+	
+	self.animateSectionHeaders = YES;
     [self reloadDataAnimated:([self.switchAnimated isOn])];
 }
 
@@ -91,7 +92,8 @@
         [self cells:self.section2Cells setHidden:hide];
         
     }
-    
+	
+	self.animateSectionHeaders = NO;
     [self reloadDataAnimated:([self.switchAnimated isOn])];
 }
 

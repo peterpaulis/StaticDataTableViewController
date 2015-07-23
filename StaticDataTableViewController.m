@@ -385,7 +385,16 @@
         [self.tableView reloadData];
         
     } else {
-    
+        
+        if (self.animateSectionHeaders) {
+            for (NSIndexPath *indexPath in self.originalTable.deleteIndexPaths) {
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                cell.layer.zPosition = -2;
+                
+                [self.tableView headerViewForSection:indexPath.section].layer.zPosition = -1;
+            }
+        }
+        
         [self.tableView beginUpdates];
         
         [self.tableView reloadRowsAtIndexPaths:self.originalTable.updateIndexPaths withRowAnimation:self.reloadTableViewRowAnimation];
@@ -396,8 +405,9 @@
         
         [self.tableView endUpdates];
         
-        [self.tableView reloadData];
-        
+        if (!self.animateSectionHeaders) {
+            [self.tableView reloadData];
+        }
     }
     
 }
@@ -459,11 +469,11 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
-		return nil;
-	} else {
-		return [super tableView:tableView titleForHeaderInSection:section];
-	}
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    } else {
+        return [super tableView:tableView titleForHeaderInSection:section];
+    }
 }
 
 @end
