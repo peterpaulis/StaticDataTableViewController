@@ -11,7 +11,7 @@
 @interface StaticDataTableViewController : UITableViewController
 
 @property (nonatomic, assign) BOOL hideSectionsWithHiddenRows;
-
+@property (nonatomic, assign) BOOL animateSectionHeaders;
 
 @property (nonatomic, assign) UITableViewRowAnimation insertTableViewRowAnimation;
 
