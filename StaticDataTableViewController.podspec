@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'StaticDataTableViewController'
-  s.version      = '2.0.3'
+  s.version      = '2.0.4'
   s.platform 	 = :ios
   s.ios.deployment_target = '5.0'
   s.summary      = 'Enabling animated hide/show of static cells for UITableView.'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   }
   s.source = {
     :git => 'https://github.com/peterpaulis/StaticDataTableViewController.git',
-    :tag => '2.0.3'
+    :tag => '2.0.4'
   }
   s.source_files = '*.{h,m}'
 end

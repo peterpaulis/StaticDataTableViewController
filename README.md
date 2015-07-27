@@ -39,6 +39,9 @@ self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
 
 ##Version History
 
+Version 2.0.4
+- added section headers animation support
+
 Version 2.0.3
 - semantic version tagging
 
