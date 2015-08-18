@@ -33,11 +33,23 @@
 
 @property (nonatomic, strong) NSIndexPath * originalIndexPath;
 
+@property (nonatomic, assign) CGFloat height;
+
 - (void)update;
 
 @end
 
 @implementation OriginalRow
+
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        self.height = CGFLOAT_MAX;
+    }
+    
+    return self;
+}
 
 - (BOOL)hidden {
     return (self.hiddenPlanned || self.hiddenPlanned);
@@ -372,6 +384,19 @@
     }
 }
 
+- (void)cell:(UITableViewCell *)cell setHeight:(CGFloat)height {
+    
+    OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
+    [row setHeight:height];
+    
+}
+
+- (void)cells:(NSArray *)cells setHeight:(CGFloat)height {
+    for (UITableViewCell * cell in cells) {
+        [self cell:cell setHeight:height];
+    }
+}
+
 - (BOOL)cellIsHidden:(UITableViewCell *)cell {
     return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
@@ -440,6 +465,11 @@
 {
     if (self.originalTable != nil) {
         OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
+        
+        if (or.height != CGFLOAT_MAX) {
+            return or.height;
+        }
+        
         indexPath = or.originalIndexPath;
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

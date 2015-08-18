@@ -30,6 +30,10 @@
 
 - (void)cells:(NSArray *)cells setHidden:(BOOL)hidden;
 
+- (void)cell:(UITableViewCell *)cell setHeight:(CGFloat)height;
+
+- (void)cells:(NSArray *)cells setHeight:(CGFloat)height;
+
 // never call [self.tableView reloadData] directly
 // doing so will lead to data inconsistenci
 // always use this method for reload
