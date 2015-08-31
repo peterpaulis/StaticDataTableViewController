@@ -39,6 +39,9 @@ self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
 
 ##Version History
 
+Version 2.0.5
+- added support for changing / setting cell height
+ 
 Version 2.0.4
 - added section headers animation support
 
