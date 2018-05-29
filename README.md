@@ -12,6 +12,14 @@ This method **doesn't use the hacky solution** with setting height to 0 and **al
 - [x] Hide empty sections
 - [x] Control section header, footer visibility for empty sections 
 
+## Installation with CocoaPods
+
+To integrate StaticDataTableViewController into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```bash
+  pod 'StaticDataTableViewController'
+```
+
 ## Usage
 
 Subclass your `UITableViewController` with the `StaticDataTableViewController`
@@ -68,21 +76,11 @@ to control if the footer or header should be displayed, overwrite these methods 
 - (BOOL)showFooterForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows;
 ```
 
-## Installation with CocoaPods
-
-To integrate StaticDataTableViewController into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```bash
-  pod 'StaticDataTableViewController'
-```
-
 ## Note
 - Create outlets to UITableViewsCells, not their content views!
-- Don't call [self.tableView reloadData], ALWAYS use (reloadDataAnimated:)
 
-
-##License
+## License
 Apache License 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
 
-##Credits
+## Credits
 min:60 - Building mobile solutions - <a href="https://min60.com">https://min60.com</a>
