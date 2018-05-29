@@ -1,76 +1,92 @@
-StaticDataTableViewController 2.0
-=============================
+<p align="center">
+  **StaticDataTableViewController**
+</p>
 
-This class enables animated hide/show of static cells (created in IB, using the option Content : Static cells) for UITableView
+----------------
 
-##Usage
+This class enables animated hide/show of static cells and sections (created in IB, using the option Content : Static cells) for UITableView
 
-- add StaticDataTableViewController.h / .m to your project
-- just subclass your UITableViewController with the StaticDataTableViewController
-- always use this method for table view reload (- (void)reloadDataAnimated:(BOOL)animated) don't call [self.tableView reloadData]
+This method **doesn't use the hacky solution** with setting height to 0 and **allows you to animate** the change and hide  **whole sections**
 
-to hide/show specific cells, to which you have an outlet
-``` objective-c
-self.hideSectionsWithHiddenRows = YES; //YES, NO
-[self cell:self.outletToMyStaticCell1 setHidden:hide];
-[self cell:self.outletToMyStaticCell2 setHidden:hide];
-[self reloadDataAnimated:YES];
+## Features
+
+- [x] Animations on cells and sections
+- [x] Change height / Resize cells
+- [x] Not using the hacky solution with height 0
+- [x] Hide empty sections
+- [x] Control section header, footer visibility for empty sections 
+
+## Usage
+
+Subclass your `UITableViewController` with the `StaticDataTableViewController`
+
+```objective-c
+#import "StaticDataTableViewController.h"
+
+@interface DemoTableViewController : StaticDataTableViewController
+
+@end
 ```
 
-to hide/show cells in an outlet collection
-``` objective-c
-self.hideSectionsWithHiddenRows = YES; //YES, NO
-[self cells:self.outletCollectionToMyStaticCells setHidden:hide];
-[self reloadDataAnimated:YES];
+**Always use this method for table view reload** 
+
+```objective-c
+- (void)reloadDataAnimated:(BOOL)animated) 
 ```
 
-to reload cell in an outlet collection
+don't call `[self.tableView reloadData]`
+
+To hide/show specific cells, to which you have an outlet or an outlet collection
+
 ``` objective-c
-[self updateCells:self.outletCollectionToMyStaticCells];
+[self cell:self.outletToMyStaticCell1 setHidden:YES];
+[self cell:self.outletToMyStaticCell2 setHidden:NO];
+[self cells:self.outletToManyCells setHidden:YES];
+[self reloadDataAnimated:YES];
+```
+- if you want to hide the whole section, just create a IBOutletCollection to all its cell, and then use `[self cells:setHidden:]`
+
+To change height of specific cells, to which you have an outlet or an outlet collection
+
+``` objective-c
+[self cell:self.outletToMyStaticCell1 setHeight:44];
+[self cell:self.outletToMyStaticCell2 setHeight:44];
+[self cells:self.outletToManyCells setHeight:200];
 [self reloadDataAnimated:YES];
 ```
 
 to customize animations, just set these properties to desired values
+
 ``` objective-c
 self.insertTableViewRowAnimation = UITableViewRowAnimationRight;
 self.deleteTableViewRowAnimation = UITableViewRowAnimationLeft;
 self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
 ```
 
-##Version History
+or call `reloadDataAnimated:insertAnimation:reloadAnimation:deleteAnimation:` with desired animation values
 
-Version 2.0.5
-- added support for changing / setting cell height
- 
-Version 2.0.4
-- added section headers animation support
+to control if the footer or header should be displayed, overwrite these methods in your subclass
 
-Version 2.0.3
-- semantic version tagging
+``` objective-c
+- (BOOL)showHeaderForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows;
+- (BOOL)showFooterForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows;
+```
 
-Version 2.0.2.1
-- Added support for Cocoa pods 
+## Installation with CocoaPods
 
-Version 2.0.2
-- Added support for variable heights on static rows
+To integrate StaticDataTableViewController into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-Version 2.0.1
-- fixed critical bug
+```bash
+  pod 'StaticDataTableViewController'
+```
 
-Version 2.0
-- added full row animation support
-
-Version 1.1
-- added iOS5 back compatibility
-- added support for IBOutletCollections and hidding multiple cells with an array of IBOutles
-
-##Note
+## Note
 - Create outlets to UITableViewsCells, not their content views!
 - Don't call [self.tableView reloadData], ALWAYS use (reloadDataAnimated:)
-- if you want to hide the whole section, just create a IBOutletCollection to all its cell, and then use [self cells:setHidden:] with (self.hideSectionsWithHiddenRows = YES)
+
 
 ##License
 Apache License 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
 
 ##Credits
-min:60 - Building perfect apps, for affordable price - <a href="https://min60.com">https://min60.com</a>
+min:60 - Building mobile solutions - <a href="https://min60.com">https://min60.com</a>
