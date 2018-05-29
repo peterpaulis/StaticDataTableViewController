@@ -1,7 +1,5 @@
 # StaticDataTableViewController
 
-----------------
-
 This class enables animated hide/show of static cells and sections (created in IB, using the option Content : Static cells) for UITableView
 
 This method **doesn't use the hacky solution** with setting height to 0 and **allows you to animate** the change and hide  **whole sections**
