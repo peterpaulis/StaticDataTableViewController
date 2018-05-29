@@ -305,9 +305,6 @@
             
             visibleAfter = visibleAfter || !or.hiddenPlanned;
             
-            or.hiddenReal = or.hiddenPlanned;
-            or.batchOperation = kBatchOperationNone;
-            
         }
         
         if (visibleBefore != visibleAfter) {
