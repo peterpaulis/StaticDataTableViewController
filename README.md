@@ -1,5 +1,5 @@
 <p align="center">
-  **StaticDataTableViewController**
+  # StaticDataTableViewController
 </p>
 
 ----------------
