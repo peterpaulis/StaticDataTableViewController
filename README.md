@@ -1,6 +1,4 @@
-<p align="center">
-  # StaticDataTableViewController
-</p>
+# StaticDataTableViewController
 
 ----------------
 
