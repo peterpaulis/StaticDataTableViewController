@@ -139,11 +139,6 @@
 			attributes = {
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Peter Paulis";
-				TargetAttributes = {
-					7EF99BD416BC4DB90066958C = {
-						DevelopmentTeam = 7BCHU3WQHS;
-					};
-				};
 			};
 			buildConfigurationList = 7EF99BD016BC4DB90066958C /* Build configuration list for PBXProject "StaticTableViewControllerSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -306,11 +301,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7BCHU3WQHS;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StaticTableViewControllerSample/StaticTableViewControllerSample-Prefix.pch";
 				INFOPLIST_FILE = "StaticTableViewControllerSample/StaticTableViewControllerSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocoapods.StaticTableViewControllerSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -322,11 +318,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 7BCHU3WQHS;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StaticTableViewControllerSample/StaticTableViewControllerSample-Prefix.pch";
 				INFOPLIST_FILE = "StaticTableViewControllerSample/StaticTableViewControllerSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocoapods.StaticTableViewControllerSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
