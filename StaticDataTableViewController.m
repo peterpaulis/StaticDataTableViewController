@@ -14,9 +14,7 @@
 #define kBatchOperationUpdate   3
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark -
-#pragma mark OriginalRow
-#pragma mark -
+#pragma mark - OriginalRow
 ////////////////////////////////////////////////////////////////////////
 
 @interface OriginalRow : NSObject
@@ -52,7 +50,7 @@
 }
 
 - (BOOL)hidden {
-    return (self.hiddenPlanned || self.hiddenPlanned);
+    return (self.hiddenPlanned);
 }
 
 - (void)setHidden:(BOOL)hidden {
@@ -78,9 +76,7 @@
 @end
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark -
-#pragma mark OriginalSection
-#pragma mark -
+#pragma mark - OriginalSection
 ////////////////////////////////////////////////////////////////////////
 
 @interface OriginalSection : NSObject
@@ -124,9 +120,7 @@
 @end
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark -
-#pragma mark OriginalTable
-#pragma mark -
+#pragma mark - OriginalTable
 ////////////////////////////////////////////////////////////////////////
 
 @interface OriginalTable : NSObject
@@ -140,6 +134,8 @@
 @property (nonatomic, strong) NSMutableArray * deleteIndexPaths;
 
 @property (nonatomic, strong) NSMutableArray * updateIndexPaths;
+
+@property (nonatomic, strong) NSMutableArray * reloadSectionsIndexes;
 
 @end
 
@@ -179,6 +175,7 @@
         self.insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.updateIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
+        self.reloadSectionsIndexes = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
         
         self.tableView = tableView;
         
@@ -277,10 +274,18 @@
     [self.deleteIndexPaths removeAllObjects];
     [self.updateIndexPaths removeAllObjects];
     
+    [self.reloadSectionsIndexes removeAllObjects];
+    
+    NSInteger sectionIndex = 0;
     for (OriginalSection * os in self.sections) {
+        
+        BOOL visibleBefore = NO;
+        BOOL visibleAfter = NO;
         
         for (OriginalRow * or in os.rows) {
         
+            visibleBefore = visibleBefore || !or.hiddenReal;
+            
             if (or.batchOperation == kBatchOperationDelete) {
                 
                 NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
@@ -298,10 +303,21 @@
                 
             }
             
+            visibleAfter = visibleAfter || !or.hiddenPlanned;
+            
+            or.hiddenReal = or.hiddenPlanned;
+            or.batchOperation = kBatchOperationNone;
+            
         }
+        
+        if (visibleBefore != visibleAfter) {
+            [self.reloadSectionsIndexes addObject:@(sectionIndex)];
+        }
+        ++sectionIndex;
         
     }
     
+    // we must do this AFTER all updates calculations, so the indexes dont mess up
     for (OriginalSection * os in self.sections) {
         
         for (OriginalRow * or in os.rows) {
@@ -318,9 +334,7 @@
 @end
 
 ////////////////////////////////////////////////////////////////////////
-#pragma mark -
-#pragma mark StaticDataTableViewController
-#pragma mark -
+#pragma mark - StaticDataTableViewController
 ////////////////////////////////////////////////////////////////////////
 
 @interface StaticDataTableViewController ()
@@ -336,13 +350,9 @@
     self = [super initWithStyle:style];
     if (self) {
         
-        // Custom initialization
-        
     }
     return self;
 }
-
-#pragma mark - Lifecycle
 
 - (void)viewDidLoad
 {
@@ -356,7 +366,9 @@
     
 }
 
+////////////////////////////////////////////////////////////////////////
 #pragma mark - Public
+////////////////////////////////////////////////////////////////////////
 
 - (void)updateCell:(UITableViewCell *)cell {
     
@@ -401,7 +413,17 @@
     return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
 }
 
+- (BOOL)isCellHidden:(UITableViewCell *)cell {
+    return [[self.originalTable originalRowWithTableViewCell:cell] hidden];
+}
+
 - (void)reloadDataAnimated:(BOOL)animated {
+
+    [self reloadDataAnimated:animated insertAnimation:self.insertTableViewRowAnimation reloadAnimation:self.reloadTableViewRowAnimation deleteAnimation:self.deleteTableViewRowAnimation];
+    
+}
+
+- (void)reloadDataAnimated:(BOOL)animated insertAnimation:(UITableViewRowAnimation)insertAnimation reloadAnimation:(UITableViewRowAnimation)reloadAnimation deleteAnimation:(UITableViewRowAnimation)deleteAnimation {
 
     [self.originalTable prepareUpdates];
     
@@ -411,36 +433,46 @@
         
     } else {
         
-        if (self.animateSectionHeaders) {
-            for (NSIndexPath *indexPath in self.originalTable.deleteIndexPaths) {
-                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                cell.layer.zPosition = -2;
-                
-                [self.tableView headerViewForSection:indexPath.section].layer.zPosition = -1;
-            }
-        }
-        
         [self.tableView beginUpdates];
         
-        [self.tableView reloadRowsAtIndexPaths:self.originalTable.updateIndexPaths withRowAnimation:self.reloadTableViewRowAnimation];
+        [self.tableView reloadRowsAtIndexPaths:self.originalTable.updateIndexPaths withRowAnimation:reloadAnimation];
         
-        [self.tableView insertRowsAtIndexPaths:self.originalTable.insertIndexPaths withRowAnimation:self.insertTableViewRowAnimation];
+        [self.tableView insertRowsAtIndexPaths:self.originalTable.insertIndexPaths withRowAnimation:insertAnimation];
         
-        [self.tableView deleteRowsAtIndexPaths:self.originalTable.deleteIndexPaths withRowAnimation:self.deleteTableViewRowAnimation];
+        [self.tableView deleteRowsAtIndexPaths:self.originalTable.deleteIndexPaths withRowAnimation:deleteAnimation];
+        
+        if ([self.originalTable.reloadSectionsIndexes count] > 0) {
+        
+            for (NSNumber * i in self.originalTable.reloadSectionsIndexes) {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:[i integerValue]] withRowAnimation:self.reloadTableViewRowAnimation];
+            }
+            
+        }
         
         [self.tableView endUpdates];
         
-        if (!self.animateSectionHeaders) {
-            [self.tableView reloadData];
-        }
     }
     
 }
 
-#pragma mark - TableView Data Source
+////////////////////////////////////////////////////////////////////////
+#pragma mark - Public / Should Overwrite
+////////////////////////////////////////////////////////////////////////
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (BOOL)showHeaderForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows {
+    return vissibleRows > 0;
+}
+
+- (BOOL)showFooterForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows {
+    return vissibleRows > 0;
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - TableView Data Source
+////////////////////////////////////////////////////////////////////////
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if (self.originalTable == nil) {
         return [super tableView:tableView numberOfRowsInSection:section];
     }
@@ -448,21 +480,21 @@
     return [self.originalTable.sections[section] numberOfVissibleRows];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (self.originalTable == nil) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     
     OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
     
-    NSAssert(or.cell != nil, @"CANNOT BE NULL");
+    NSAssert(or.cell != nil, @"Original cell cannot be nil, make sure to use a static table view");
     
     return or.cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (self.originalTable != nil) {
         OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
         
@@ -476,52 +508,94 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-
-    CGFloat height = [super tableView:tableView heightForHeaderInSection:section];
-
-    return [self headerFooterHeightForSection:section originalHeight:height];
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
-        return nil;
-    } else {
+    
+    if (self.originalTable == nil) {
         return [super tableView:tableView titleForHeaderInSection:section];
     }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
-    CGFloat height = [super tableView:tableView heightForFooterInSection:section];
-
-    return [self headerFooterHeightForSection:section originalHeight:height];
-}
-
-- (CGFloat)headerFooterHeightForSection:(NSInteger)section originalHeight:(CGFloat)height
-{
-    if (self.originalTable == nil) {
-        return height;
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([self showHeaderForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView titleForHeaderInSection:section];
+    } else {
+        return nil;
     }
+    
+}
 
-    if (!self.hideSectionsWithHiddenRows) {
-        return height;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (self.originalTable == nil) {
+        return [super tableView:tableView viewForHeaderInSection:section];
     }
 
     OriginalSection * os = self.originalTable.sections[section];
-    if ([os numberOfVissibleRows] == 0) {
-        return CGFLOAT_MIN;
+    if ([self showHeaderForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView viewForHeaderInSection:section];
     } else {
-        return height;
+        return nil;
     }
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (self.originalTable == nil) {
+        return [super tableView:tableView heightForHeaderInSection:section];
+    }
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([self showHeaderForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView heightForHeaderInSection:section];
+    } else {
+        return CGFLOAT_MIN;
+    }
+
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
-        return nil;
-    } else {
+    
+    if (self.originalTable == nil) {
         return [super tableView:tableView titleForFooterInSection:section];
     }
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([self showFooterForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView titleForFooterInSection:section];
+    } else {
+        return nil;
+    }
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if (self.originalTable == nil) {
+        return [super tableView:tableView viewForFooterInSection:section];
+    }
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([self showFooterForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView viewForFooterInSection:section];
+    } else {
+        return nil;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    if (self.originalTable == nil) {
+        return [super tableView:tableView heightForFooterInSection:section];
+    }
+    
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([self showHeaderForSection:section vissibleRows:[os numberOfVissibleRows]]) {
+        return [super tableView:tableView heightForFooterInSection:section];
+    } else {
+        return CGFLOAT_MIN;
+    }
+    
 }
 
 @end

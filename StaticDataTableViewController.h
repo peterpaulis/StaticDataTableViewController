@@ -10,33 +10,51 @@
 
 @interface StaticDataTableViewController : UITableViewController
 
-@property (nonatomic, assign) BOOL hideSectionsWithHiddenRows;
-@property (nonatomic, assign) BOOL animateSectionHeaders;
 
 @property (nonatomic, assign) UITableViewRowAnimation insertTableViewRowAnimation;
 
-@property (nonatomic, assign) UITableViewRowAnimation deleteTableViewRowAnimation;
-
 @property (nonatomic, assign) UITableViewRowAnimation reloadTableViewRowAnimation;
 
+@property (nonatomic, assign) UITableViewRowAnimation deleteTableViewRowAnimation;
 
-- (BOOL)cellIsHidden:(UITableViewCell *)cell;
 
-- (void)updateCell:(UITableViewCell *)cell;
+// Shown / Hidden
+- (void)cell:(nonnull UITableViewCell *)cell setHidden:(BOOL)hidden;
 
-- (void)updateCells:(NSArray *)cells;
+- (void)cells:(nonnull NSArray *)cells setHidden:(BOOL)hidden;
 
-- (void)cell:(UITableViewCell *)cell setHidden:(BOOL)hidden;
+- (BOOL)isCellHidden:(nonnull UITableViewCell *)cell;
 
-- (void)cells:(NSArray *)cells setHidden:(BOOL)hidden;
 
-- (void)cell:(UITableViewCell *)cell setHeight:(CGFloat)height;
+// Height
+- (void)cell:(nonnull UITableViewCell *)cell setHeight:(CGFloat)height;
 
-- (void)cells:(NSArray *)cells setHeight:(CGFloat)height;
+- (void)cells:(nonnull NSArray *)cells setHeight:(CGFloat)height;
 
+
+// Update
+- (void)updateCell:(nonnull UITableViewCell *)cell;
+
+- (void)updateCells:(nonnull NSArray *)cells;
+
+
+// Reload
 // never call [self.tableView reloadData] directly
-// doing so will lead to data inconsistenci
-// always use this method for reload
+// doing so will lead to data inconsistency
+// ALWAYS! use this method for reload!
 - (void)reloadDataAnimated:(BOOL)animated;
+
+- (void)reloadDataAnimated:(BOOL)animated insertAnimation:(UITableViewRowAnimation)insertAnimation reloadAnimation:(UITableViewRowAnimation)reloadAnimation deleteAnimation:(UITableViewRowAnimation)deleteAnimation;
+
+
+// you may want to overwrite these two methods in your subclass, to provide custom logic (eg. force the header or footer to be shown, even when no cell are vissible)
+- (BOOL)showHeaderForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows;
+- (BOOL)showFooterForSection:(NSInteger)section vissibleRows:(NSInteger)vissibleRows;
+
+
+// Depracated
+@property (nonatomic, assign) BOOL animateSectionHeaders DEPRECATED_ATTRIBUTE;
+@property (nonatomic, assign) BOOL hideSectionsWithHiddenRows DEPRECATED_ATTRIBUTE; // use showHeaderForSection:vissibleRows: and showFooterForSection::vissibleRows:
+- (BOOL)cellIsHidden:(nonnull UITableViewCell *)cell DEPRECATED_ATTRIBUTE; // use isCellHidden:
 
 @end
