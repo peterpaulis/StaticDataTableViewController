@@ -12,6 +12,12 @@ This method **doesn't use the hacky solution** with setting height to 0 and **al
 - [x] Hide empty sections
 - [x] Control section header, footer visibility for empty sections 
 
+<p align="center">
+  Demo app
+  <img src="demoapp.jpg" />
+  <a href="http://www.vernissageapp.com/">Created with Vernissage app</a>
+</p>
+
 ## Installation with CocoaPods
 
 To integrate StaticDataTableViewController into your Xcode project using CocoaPods, specify it in your `Podfile`:
