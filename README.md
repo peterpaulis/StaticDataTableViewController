@@ -1,3 +1,5 @@
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 # StaticDataTableViewController
 
 This class enables animated hide/show of static cells and sections (created in IB, using the option Content : Static cells) for UITableView
